@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: workaround-syn-sent
+  name: workaround-syn-sent
+spec:
+  selector:
+    matchLabels:
+      app: workaround-syn-sent
+  template:
+    metadata:
+      labels:
+        app: workaround-syn-sent
+    spec:
+      containers:
+      - name: workaround-syn-sent
+        image: ${IMAGE}
+        imagePullPolicy: IfNotPresent
+        resources:
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        command:
+          - /bin/bash
+          - -c
+          - |-
+          ${SCRIPT}
